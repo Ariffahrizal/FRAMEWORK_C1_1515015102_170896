@@ -14,31 +14,30 @@ class DosenController extends Controller
     public function awal()
     {
     	// return "Hello, ini dari DosenController";
-        return view('dosen.awal',['data'=>Dosen::all()]);
+        //return view('dosen.awal',['data'=>Dosen::all()]);
+        $data = Dosen::all();//
+        return view('dosen.awal', compact('data'));
     }
 
     public function tambah()
     {
-    	// return $this->simpan();
         return view('dosen.tambah');
     }
 
     public function simpan(Request $input)
     {
-    // //     // $dosen = new Dosen();
-    // //     // $dosen->nama = 'Arif';
-    // //     // $dosen->nip = '1515015102';
-    // //     // $dosen->alamat = 'Pramuka 6 Komp P&K';
-    // //     // $dosen->pengguna_id = 1;
-    // //     // $dosen->save();
-    // //     // return "Data Dosen dengan nama {$dosen->nama} telah disimpan";
+        $pengguna = new Pengguna($input->only('username','password'));
+        
+        if ($pengguna->save()) {
         $dosen = new Dosen();
     	$dosen->nama = $input->nama;
     	$dosen->nip = $input->nip;
     	$dosen->alamat = $input->alamat;
-        $dosen->pengguna_id = $input->pengguna_id;
-    	$informasi = $dosen->save() ? 'Berhasil menyimpan data':'Gagal simpan data';
-    	return redirect('dosen')->with(['informasi'=>$informasi]);
+    	// $informasi = $dosen->save() ? 'Berhasil menyimpan data':'Gagal simpan data';
+    	   if($pengguna->dosen()->save($dosen)) 
+            $this->informasi='Berhasil simpan data';
+        }        
+        return redirect ('dosen')->with(['informasi'=>$this->informasi]);
     }
 
     public function edit($id)
@@ -59,9 +58,29 @@ class DosenController extends Controller
         $dosen->nama = $input->nama;
         $dosen->nip = $input->nip;
         $dosen->alamat = $input->alamat;
-        $dosen->pengguna_id = $input->pengguna_id;
-        $informasi = $dosen->save() ? 'Berhasil update data':'Gagal update data';
-        return redirect('dosen')->with(['informasi'=>$informasi]);
+        // $dosen->pengguna_id = $input->pengguna_id;
+        // $informasi = $dosen->save() ? 'Berhasil update data':'Gagal update data';
+        // return redirect('dosen')->with(['informasi'=>$informasi]);
+        // $dosen->pengguna_id = $input->pengguna_id;
+        //     if(!is_null($input->username)){
+        //         $pengguna = $dosen->pengguna->fill($input->only('username'));
+        //     if(!empty($input->password)) 
+        //         $pengguna->password = $input->password;
+        //     if($pengguna->save()) 
+        //     $this->informasi = 'Berhasil simpan data';
+        // }
+        // else{
+        //     $this->informasi = 'Berhasil simpan data';
+        // }
+        $dosen->save(); 
+        if(!is_null($input->username)) {
+            $pengguna = $dosen -> pengguna->fill($input -> only ('username'));
+            if (!empty($input->password)) 
+                $pengguna -> password = $input -> password;
+            if ($pengguna()->save()) 
+                $this->informasi='Berhasil simpan data';
+        }
+        return redirect ('dosen') -> with (['informasi'=>$this->informasi]);
     }
 
 

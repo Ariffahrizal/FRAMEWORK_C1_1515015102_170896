@@ -12,8 +12,9 @@
 		<thead>
 			<tr>
 				<th>No.</th>
-				<th>ID Mahasiswa</th>
-				<th>ID Ruangan</th>
+				<th>Nama Mahasiswa</th>
+				<th>NIM Mahasiswa</th>
+				<th>Nama Ruangan</th>
 				<th>ID Dosen Matakuliah</th>
 				<th>Aksi</th>
 			</tr>
@@ -23,8 +24,9 @@
 				@foreach ($data as $jadwal_matakuliah)
 				<tr>
 					<td>{{$x++}}</td>
-					<td>{{$jadwal_matakuliah->mahasiswa_id or 'ID Mahasiswa kosong'}}</td>
-					<td>{{$jadwal_matakuliah->ruangan_id or 'ID Ruangan kosong'}}</td>
+					<td>{{$jadwal_matakuliah->mahasiswa->nama or 'Nama Mahasiswa kosong'}}</td>
+					<td>{{$jadwal_matakuliah->mahasiswa->nim or 'NIM Mahasiswa kosong'}}</td>
+					<td>{{$jadwal_matakuliah->ruangan->title or 'Nama Ruangan kosong'}}</td>
 					<td>{{$jadwal_matakuliah->dosen_matakuliah_id or 'ID Dosen Matakuliah kosong'}}</td>
 					<td>
 						<div class="btn-group" role="group">

@@ -3,7 +3,7 @@
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<strong>
-				<a href="{{url('pengguna')}}"> 
+				<a href="{{url('dosen')}}"> 
 					<i style="color:white;" class="fa text-default fa-chevron-left"></i>
 				</a>Tambah Data Dosen
 			</strong>

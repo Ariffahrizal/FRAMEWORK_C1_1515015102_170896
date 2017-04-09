@@ -7,22 +7,20 @@
 			<i style="color:#8a6d3b" class="fa text-default fa-chevron-left"></i></a>Detail Data dosen_matakuliah</strong>
 	</div>
 <table class="table">
-	<tr>
-		<td>ID Dosen</td>
-		<td>:</td>
-		<td>{{$dosen_matakuliah->dosen_id}}</td>
-	</tr>
+
 	<tr>
 		<td>Nama Dosen</td>
 		<td>:</td>
 		<td>{{$dosen_matakuliah->dosen->nama}}</td>
 	</tr>
+
 	<tr>
-		<td>ID Matakuliah</td>
+		<td>NIP Dosen</td>
 		<td>:</td>
-		<td>{{$dosen_matakuliah->matakuliah_id}}</td>
+		<td>{{$dosen_matakuliah->dosen->nip}}</td>
 	</tr>
 	<tr>
+
 		<td>Matakuliah</td>
 		<td>:</td>
 		<td>{{$dosen_matakuliah->matakuliah->title}}</td>
